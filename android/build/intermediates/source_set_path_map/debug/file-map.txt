@@ -1,0 +1,7 @@
+com.alex.chica.android-pngs-0 /home/supersecretuser/StudioProjects/M08-Animation/android/build/generated/res/pngs/debug
+com.alex.chica.android-resValues-1 /home/supersecretuser/StudioProjects/M08-Animation/android/build/generated/res/resValues/debug
+com.alex.chica.android-packageDebugResources-2 /home/supersecretuser/StudioProjects/M08-Animation/android/build/intermediates/incremental/debug/packageDebugResources/merged.dir
+com.alex.chica.android-packageDebugResources-3 /home/supersecretuser/StudioProjects/M08-Animation/android/build/intermediates/incremental/debug/packageDebugResources/stripped.dir
+com.alex.chica.android-merged_res-4 /home/supersecretuser/StudioProjects/M08-Animation/android/build/intermediates/merged_res/debug
+com.alex.chica.android-android-5 /home/supersecretuser/StudioProjects/M08-Animation/android/res
+com.alex.chica.android-debug-6 /home/supersecretuser/StudioProjects/M08-Animation/android/src/debug/res

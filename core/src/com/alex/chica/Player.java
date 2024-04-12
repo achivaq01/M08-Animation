@@ -9,16 +9,20 @@ public class Player {
     public static final int WIDTH = 50;
     public static final float ANIMATION_SPEED = .15f;
 
-    private Animation<TextureRegion> upFrames;
-    private Animation<TextureRegion> downFrames;
-    private Animation<TextureRegion> rightFrames;
-    private Animation<TextureRegion> leftFrames;
-    private Animation<TextureRegion> upRightFrames;
-    private Animation<TextureRegion> upLeftFrames;
-    private Animation<TextureRegion> downRightFrames;
-    private Animation<TextureRegion> downLeftFrames;
+    private final Animation<TextureRegion> idleFrames;
+    private final Animation<TextureRegion> upFrames;
+    private final Animation<TextureRegion> downFrames;
+    private final Animation<TextureRegion> rightFrames;
+    private final Animation<TextureRegion> leftFrames;
+    private final Animation<TextureRegion> upRightFrames;
+    private final Animation<TextureRegion> upLeftFrames;
+    private final Animation<TextureRegion> downRightFrames;
+    private final Animation<TextureRegion> downLeftFrames;
 
     private Player(Texture spriteSheet) {
+        idleFrames = new Animation<TextureRegion>(ANIMATION_SPEED,
+                new TextureRegion(spriteSheet, 200, 50, 50, 50));
+
         upFrames = new Animation<TextureRegion>(ANIMATION_SPEED,
                 new TextureRegion(spriteSheet, 0, 0, WIDTH, HEIGHT),
                 new TextureRegion(spriteSheet, 50, 0, WIDTH, HEIGHT),
@@ -55,28 +59,23 @@ public class Player {
                 new TextureRegion(spriteSheet, 100, 250, WIDTH, HEIGHT),
                 new TextureRegion(spriteSheet, 150, 250, WIDTH, HEIGHT));
 
-        downLeftFrames = new Animation<>(ANIMATION_SPEED,
+        leftFrames = new Animation<>(ANIMATION_SPEED,
                 new TextureRegion(spriteSheet, 0, 300, WIDTH, HEIGHT),
                 new TextureRegion(spriteSheet, 50, 300, WIDTH, HEIGHT),
                 new TextureRegion(spriteSheet, 100, 300, WIDTH, HEIGHT),
                 new TextureRegion(spriteSheet, 150, 300, WIDTH, HEIGHT));
 
-        leftFrames = new Animation<>(ANIMATION_SPEED,
+        upLeftFrames = new Animation<>(ANIMATION_SPEED,
                 new TextureRegion(spriteSheet, 0, 350, WIDTH, HEIGHT),
                 new TextureRegion(spriteSheet, 50, 350, WIDTH, HEIGHT),
                 new TextureRegion(spriteSheet, 100, 350, WIDTH, HEIGHT),
                 new TextureRegion(spriteSheet, 150, 350, WIDTH, HEIGHT));
-
-        upLeftFrames = new Animation<>(ANIMATION_SPEED,
-                new TextureRegion(spriteSheet, 0, 400, WIDTH, HEIGHT),
-                new TextureRegion(spriteSheet, 50, 400, WIDTH, HEIGHT),
-                new TextureRegion(spriteSheet, 100, 400, WIDTH, HEIGHT),
-                new TextureRegion(spriteSheet, 150, 400, WIDTH, HEIGHT));
     }
-
     public static Player fromTexture(Texture spriteSheet) {
         return new Player(spriteSheet);
     }
+
+    public Animation<TextureRegion> getIdleFrames() { return idleFrames; }
 
     public Animation<TextureRegion> getUpFrames() {
         return upFrames;

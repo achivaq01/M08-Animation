@@ -1,0 +1,4 @@
+#Fri Apr 12 15:46:13 CEST 2024
+base.0=/home/supersecretuser/StudioProjects/M08-Animation/android/build/intermediates/dex/debug/mergeDexDebug/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

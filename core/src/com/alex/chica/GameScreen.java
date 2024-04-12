@@ -20,11 +20,13 @@ public class GameScreen implements Screen {
     float stateTime;
     Rectangle up, down, left, right, fire;
     final int IDLE=0, UP=1, DOWN=2, LEFT=3, RIGHT=4, UP_RIGHT=5, UP_LEFT=6, DOWN_RIGHT=7, DOWN_LEFT=8;
+    int posX;
+    int posY;
 
     public GameScreen(Main game) {
         this.game = game;
 
-        background = new Texture(Gdx.files.internal("background.png"));
+        background = new Texture(Gdx.files.internal("background.jpg"));
         background.setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
         backgroundRegion = new TextureRegion(background);
         spriteSheet = new Texture(Gdx.files.internal("spritesheet.png"));
@@ -39,6 +41,8 @@ public class GameScreen implements Screen {
         down = new Rectangle(0, 0, game.SCR_WIDTH, game.SCR_HEIGHT/3);
         left = new Rectangle(0, 0, game.SCR_WIDTH/3, game.SCR_HEIGHT);
         right = new Rectangle(game.SCR_WIDTH*2/3, 0, game.SCR_WIDTH/3, game.SCR_HEIGHT);
+        posX = 0;
+        posY = 0;
     }
 
     protected int virtual_joystick_control() {
@@ -49,21 +53,35 @@ public class GameScreen implements Screen {
                 camera.unproject(touchPos);
 
                 if (up.contains(touchPos.x, touchPos.y) && right.contains(touchPos.x, touchPos.y)) {
+                    posX += 10;
+                    posY += -10;
                     return UP_RIGHT;
                 } else if (up.contains(touchPos.x, touchPos.y) && left.contains(touchPos.x, touchPos.y)) {
+                    posX += -10;
+                    posY += -10;
                     return  UP_LEFT;
                 }else if (down.contains(touchPos.x, touchPos.y) && right.contains(touchPos.x, touchPos.y)) {
+                    posX += 10;
+                    posY += 10;
                     return  DOWN_RIGHT;
                 }else if (down.contains(touchPos.x, touchPos.y) && left.contains(touchPos.x, touchPos.y)) {
+                    posX += -10;
+                    posY += 10;
                     return  DOWN_LEFT;
                 } else if (up.contains(touchPos.x, touchPos.y)) {
+                    posY += -14;
                     return UP;
                 } else if (down.contains(touchPos.x, touchPos.y)) {
+                    posY += 14;
                     return DOWN;
                 } else if (left.contains(touchPos.x, touchPos.y)) {
+                    posX += -14;
                     return LEFT;
                 } else if (right.contains(touchPos.x, touchPos.y)) {
+                    posX += 14;
                     return RIGHT;
+                } else {
+                    return IDLE;
                 }
             }
         return IDLE;
@@ -85,31 +103,43 @@ public class GameScreen implements Screen {
         TextureRegion keyFrame = player.getDownFrames().getKeyFrame(stateTime, true);
         switch (virtual_joystick_control()) {
             case 1:
+                System.out.println("up");
                 keyFrame = player.getUpFrames().getKeyFrame(stateTime, true);
                 break;
             case 2:
+                System.out.println("down");
                 keyFrame = player.getDownFrames().getKeyFrame(stateTime, true);
                 break;
             case 3:
+                System.out.println("left");
                 keyFrame = player.getLeftFrames().getKeyFrame(stateTime, true);
                 break;
             case 4:
+                System.out.println("right");
                 keyFrame = player.getRightFrames().getKeyFrame(stateTime, true);
                 break;
             case 5:
+                System.out.println("up right");
                 keyFrame = player.getUpRightFrames().getKeyFrame(stateTime, true);
                 break;
             case 6:
+                System.out.println("up left");
                 keyFrame = player.getUpLeftFrames().getKeyFrame(stateTime, true);
                 break;
             case 7:
+                System.out.println("down right");
                 keyFrame = player.getDownRightFrames().getKeyFrame(stateTime, true);
                 break;
             case 8:
+                System.out.println("down left");
                 keyFrame = player.getDownLeftFrames().getKeyFrame(stateTime, true);
                 break;
+            default:
+                System.out.println("idle");
+                keyFrame = player.getIdleFrames().getKeyFrame(stateTime, true);
+                break;
         }
-        backgroundRegion.setRegion(0, 0, 800, 480);
+        backgroundRegion.setRegion(posX, posY, 800, 480);
 
         game.batch.begin();
         game.batch.draw(backgroundRegion, 0, 0);
