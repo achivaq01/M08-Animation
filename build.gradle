@@ -27,6 +27,7 @@ allprojects {
         ashleyVersion = '1.7.4'
         aiVersion = '1.8.2'
         gdxControllersVersion = '2.2.1'
+        wsVersion = '1.9.10.3'
     }
 
     repositories {
@@ -62,7 +63,9 @@ project(":core") {
 
     dependencies {
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
-        
+        implementation 'com.fasterxml.jackson.core:jackson-core:2.10.1'
+        implementation 'com.fasterxml.jackson.core:jackson-annotations:2.10.1'
+        implementation 'com.fasterxml.jackson.core:jackson-databind:2.10.1'
     }
 }
 
